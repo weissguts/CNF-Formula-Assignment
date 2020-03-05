@@ -40,8 +40,10 @@ public class SatNpApp {
 //  prompt the user for a variable assignment (see AssignmentView below),
             do {
                 Assignment assignment = new Assignment();
-
+                assignment.setValue(formula.clauses.get(0).literals.get(0).getName(),formula.clauses.get(0).literals.get(0).isIsNegated());
+                System.out.println("Test 5!!!");
                 view.setModel(assignment);
+                System.out.println("Test 6!!!");
                 view.setVisible(true);
                 
                 assignment = view.getModel(); //make sure assignment is right
