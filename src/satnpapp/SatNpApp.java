@@ -27,12 +27,16 @@ public class SatNpApp {
     public static void main(String[] args) throws Exception{
 //  prompts the user for the location of a file to load a cnf-formula (use JFileChooser)
         view = new AssignmentView();
-
+        System.out.println("Test 1!!!");
         chooseExprLocation();
+       System.out.println("Test 2!!!");
 //  reads a cnf-formula from the file creating a CnfFormula object (see file-format below),
 
         try {
             CnfFormula formula = loadCnfFormula();
+             System.out.println("Test 3!!!");
+            
+           
 //  prompt the user for a variable assignment (see AssignmentView below),
             do {
                 Assignment assignment = new Assignment();
@@ -95,13 +99,15 @@ public class SatNpApp {
                     }
                     Literal literal = new Literal(disjunctionString, isNegated);
                     clause.addLiteral(literal);
+                    loadedFormula.addClause(clause);
+                    System.out.println("Test 4!!!");
 //                    clause.addLiteral(disjunctionString);
                 }
                 
 
             }
-        }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } return loadedFormula;
+        
     }
 
     private static void isSatisfiable(CnfFormula formula) {
