@@ -99,22 +99,20 @@ public class SatNpApp {
 
                     if (disjunctionString.charAt(0) == 'n') {
                         isNegated = true;
-                        disjunctionString = disjunctionString.substring(1);
+                        disjunctionString = disjunctionString.substring(0, 3);
                     }
                     if (disjunctionString.charAt(0) == '(') {
                         disjunctionString = disjunctionString.substring(1);
                     }
                     if (disjunctionString.endsWith(")")) {
-                        disjunctionString = disjunctionString.substring(0, 1);
+                        disjunctionString = disjunctionString.substring(0, 2);
                     }
-
-                    Literal literal = new Literal(disjunctionString, isNegated);
-
+                    
+                    Literal literal = new Literal(disjunctionString, isNegated);                    
                     clause.addLiteral(literal);
 
                     loadedFormula.addClause(clause);
                     System.out.println("Test 4!!!");
-//                    clause.addLiteral(disjunctionString);
 
                 }
 

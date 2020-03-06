@@ -38,6 +38,8 @@ public class Clause {
                
     }
     
+    
+    
 //    static String[] literals;
 //    
 //    public static boolean verify(Assignment assignment) {

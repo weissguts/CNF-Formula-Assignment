@@ -37,7 +37,10 @@ public class Assignment {
         
         for(Literal entry : assignments.keySet()) {
             String key = entry.getName();
-            newLiteralsList.add(key);
+            if(!newLiteralsList.contains(key)) {
+                newLiteralsList.add(key);
+            }
+           
             System.out.println("Test 8!!!");
         }
        
