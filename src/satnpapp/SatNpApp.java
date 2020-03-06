@@ -24,35 +24,33 @@ public class SatNpApp {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 //  prompts the user for the location of a file to load a cnf-formula (use JFileChooser)
         view = new AssignmentView();
         System.out.println("Test 1!!!");
         chooseExprLocation();
-       System.out.println("Test 2!!!");
+        System.out.println("Test 2!!!");
 //  reads a cnf-formula from the file creating a CnfFormula object (see file-format below),
 
         try {
             CnfFormula formula = loadCnfFormula();
-             System.out.println("Test 3!!!");
-            
-           
+            System.out.println("Test 3!!!");
+
 //  prompt the user for a variable assignment (see AssignmentView below),
             do {
                 Assignment assignment = new Assignment();
-                
+
                 for (int i = 0; i < formula.clauses.size(); i++) {
-                assignment.setValue(formula.clauses.get(i).literals.get(i).getName(),formula.clauses.get(i).literals.get(i).isIsNegated());               
+                    assignment.setValue(formula.clauses.get(i).literals.get(i).getName(), formula.clauses.get(i).literals.get(i).isIsNegated());
                 }
-          
+
                 System.out.println("Test 5!!!");
                 view.setModel(assignment);
                 System.out.println("Test 6!!!");
                 view.setVisible(true);
-                
+
                 assignment = view.getModel(); //make sure assignment is right
-                
-                
+
 //  verifies and displays whether the user’s assignment satisfies the cnf-formula,
                 if (formula.verify(assignment)) {
                     JOptionPane.showMessageDialog(null, "Satisfied");
@@ -84,36 +82,46 @@ public class SatNpApp {
     }
 
     private static CnfFormula loadCnfFormula() throws IOException {
-        CnfFormula loadedFormula = new CnfFormula();        
-        
+        CnfFormula loadedFormula = new CnfFormula();
+
         //read line
         String firstLine = bufferedReader.readLine();
         if (firstLine != null) {
-            String[] clauseStrings = firstLine.split(" ^ ");
+            String[] clauseStrings = firstLine.split(" \\^ ");
             String[] disjunctionStrings;
             String[] literalStrings;
             for (String clauseString : clauseStrings) {
                 Clause clause = new Clause();
                 disjunctionStrings = clauseString.split(" v ");
-                
-                for (String disjunctionString : disjunctionStrings) {                                      
+
+                for (String disjunctionString : disjunctionStrings) {
                     boolean isNegated = false;
-                    
-                    if(disjunctionString.charAt(0) == 'n') {
+
+                    if (disjunctionString.charAt(0) == 'n') {
                         isNegated = true;
                         disjunctionString = disjunctionString.substring(1);
                     }
+                    if (disjunctionString.charAt(0) == '(') {
+                        disjunctionString = disjunctionString.substring(1);
+                    }
+                    if (disjunctionString.endsWith(")")) {
+                        disjunctionString = disjunctionString.substring(0, 1);
+                    }
+
                     Literal literal = new Literal(disjunctionString, isNegated);
+
                     clause.addLiteral(literal);
+
                     loadedFormula.addClause(clause);
                     System.out.println("Test 4!!!");
 //                    clause.addLiteral(disjunctionString);
+
                 }
-                
 
             }
-        } return loadedFormula;
-        
+        }
+        return loadedFormula;
+
     }
 
     private static void isSatisfiable(CnfFormula formula) {
