@@ -69,7 +69,7 @@ public class AssignmentView extends JDialog
      */
     public void setModel(Assignment model){
         this.model = model;
-        System.out.println("Test 6!!!");
+//        System.out.println("Test 6 Model!!!");
         updateDisplay();
     }
     
@@ -116,9 +116,9 @@ public class AssignmentView extends JDialog
      * Update the view to display the current model
      */
     private void updateDisplay() {
-        System.out.println("Test 7!!!");        
+//        System.out.println("Test 7!!!");        
         String[] variables = Assignment.literalsA();
-        System.out.println("Test 8!!!"); 
+//        System.out.println("Test 8!!!"); 
         Object[][] data = new Object[variables.length][2];
         
         for (int i = 0; i < variables.length; i++) {

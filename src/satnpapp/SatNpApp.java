@@ -13,7 +13,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *  This assignment focuses on conjunctive normal form formulas (cnf-formula) and satisfiability.
  * @author Daniel Hernandez
  */
 public class SatNpApp {
@@ -27,46 +27,53 @@ public class SatNpApp {
     public static void main(String[] args) throws Exception {
 //  prompts the user for the location of a file to load a cnf-formula (use JFileChooser)
         view = new AssignmentView();
-        System.out.println("Test 1!!!");
+//        System.out.println("Test 1 Main!!!");
         chooseExprLocation();
-        System.out.println("Test 2!!!");
+//        System.out.println("Test 2 Main!!!");
 //  reads a cnf-formula from the file creating a CnfFormula object (see file-format below),
 
         try {
             CnfFormula formula = loadCnfFormula();
-            System.out.println("Test 3!!!");
+//            System.out.println("Test 3 Main !!!");
 
 //  prompt the user for a variable assignment (see AssignmentView below),
             do {
+                int i = 0;
+                int j = formula.clauses.size();
                 Assignment assignment = new Assignment();
 
-                for (int i = 0; i < formula.clauses.size(); i++) {
+                while (!(i >= j)) {
                     assignment.setValue(formula.clauses.get(i).literals.get(i).getName(), formula.clauses.get(i).literals.get(i).isIsNegated());
-                }
-
-                System.out.println("Test 5!!!");
-                view.setModel(assignment);
-                System.out.println("Test 6!!!");
-                view.setVisible(true);
-
-                assignment = view.getModel(); //make sure assignment is right
-
-//  verifies and displays whether the user’s assignment satisfies the cnf-formula,
+                    i++;                    
+                }                 
+//                    System.out.println("Test 5 Main!!!");
+                    view.setModel(assignment);
+//                    System.out.println("Test 6 Main!!!");
+                    view.setVisible(true);                //***For some reason 
+                    // .setVisibile is adding to my assignments hash map. This is causing issues when verifying.
+//                    System.out.println("Test 9 Main!!!");
+                    assignment = view.getModel(); //make sure assignment is right
+//                    System.out.println("Test 10 Main!!!");
+//  verifies and displays whether the user’s assignment satisfies the cnf-formula,                
                 if (formula.verify(assignment)) {
                     JOptionPane.showMessageDialog(null, "Satisfied");
                 } else {
                     JOptionPane.showMessageDialog(null, "Not Satisfied");
-                }
+                }               
+//              ****Exiting here since program is not complete, and will run
+//              ****infinitely. 
+                System.exit(0);
 //  determines whether the cnf-formula is satisfiable and if so, output the assignment,
                 isSatisfiable(formula);
             } while (trueFalsePrompt("Test another input string?"));
         } catch (Exception e) {
         }
+
     }
 
 //  as Java comments give the Big-O analysis of the verify and isSatisfiable methods,
 //  as a separate file, submit the cnf-formula file you “unit” tested on.       
-    static boolean verify(Assignment assignment) {
+    static boolean verify(Assignment assignment) {        
         return false;
     }
 
@@ -107,12 +114,12 @@ public class SatNpApp {
                     if (disjunctionString.endsWith(")")) {
                         disjunctionString = disjunctionString.substring(0, 2);
                     }
-                    
-                    Literal literal = new Literal(disjunctionString, isNegated);                    
+
+                    Literal literal = new Literal(disjunctionString, isNegated);
                     clause.addLiteral(literal);
 
                     loadedFormula.addClause(clause);
-                    System.out.println("Test 4!!!");
+//                    System.out.println("Test 4!!!");
 
                 }
 

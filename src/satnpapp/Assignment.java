@@ -41,7 +41,7 @@ public class Assignment {
                 newLiteralsList.add(key);
             }
            
-            System.out.println("Test 8!!!");
+//            System.out.println("Test 8!!!");
         }
        
         for (int i = 0; i <newLiteralsList.size(); i++) {            
